@@ -6,3 +6,13 @@
 .DS_Store
 /build
 /captures
+
+# Java class files
+*.class
+
+# files for the dex VM
+*.dex
+
+# Keystore files
+*.jks
+
