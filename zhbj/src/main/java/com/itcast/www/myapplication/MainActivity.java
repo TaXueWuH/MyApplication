@@ -36,4 +36,11 @@ public class MainActivity extends SlidingFragmentActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_menu,new MenuFragment(),"MENU").commit();
     }
+
+    public  MenuFragment getMenuFragmentByTag(){
+        return (MenuFragment) getSupportFragmentManager().findFragmentByTag("MENU");
+    }
+    public ContentFragment getContentFragmentByTag(){
+        return (ContentFragment) getSupportFragmentManager().findFragmentByTag("CONTENT");
+    }
 }

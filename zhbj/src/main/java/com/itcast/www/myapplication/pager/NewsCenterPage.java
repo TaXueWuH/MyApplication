@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.itcast.www.myapplication.MainActivity;
 import com.itcast.www.myapplication.bean.NewsCenterBean;
+import com.itcast.www.myapplication.fragment.MenuFragment;
 import com.itcast.www.myapplication.utils.NetUrl;
 import com.itcast.www.myapplication.utils.StringUtils;
 import com.lidroid.xutils.HttpUtils;
@@ -48,8 +50,7 @@ public class NewsCenterPage extends BasePager {
     }
 
     private void requestData() {
-        HttpUtils httpUtils = new HttpUtils();
-        httpUtils.send(HttpRequest.HttpMethod.GET, NetUrl.NEWS_CENTER_CATEGORIES,  null, new RequestCallBack<String>() {
+        sendRequest(NetUrl.NEWS_CENTER_CATEGORIES,new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 String result = responseInfo.result;
@@ -65,9 +66,23 @@ public class NewsCenterPage extends BasePager {
         });
     }
 
+    /**
+     * 抽取自定义的网络请求
+     * @param url
+     * @param requestCallBack
+     */
+    private void sendRequest(String url,RequestCallBack<String> requestCallBack) {
+        HttpUtils httpUtils = new HttpUtils();
+        httpUtils.send(HttpRequest.HttpMethod.GET, url,  null,requestCallBack);
+    }
+
     private void parseJson(String result) {
         Gson gson = new Gson();
         NewsCenterBean newsCenterBean = gson.fromJson(result, NewsCenterBean.class);
-                Log.i("NewsCenterPage","解析成功"+newsCenterBean.data.get(0).title);
+
+        //将解析出来的数据传递给MenuFragment界面
+        MainActivity mainActivity = (MainActivity) context;
+        MenuFragment menuFragment = mainActivity.getMenuFragmentByTag();
+        menuFragment.initSubMenu(newsCenterBean.data);
     }
 }

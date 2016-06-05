@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">新闻客户端</string>
 
     <string name="tab_function">首页</string>
     <string name="tab_news_center">新闻中心</string>
