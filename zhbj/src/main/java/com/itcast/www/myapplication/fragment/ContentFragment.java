@@ -1,7 +1,7 @@
 package com.itcast.www.myapplication.fragment;
 
+
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
@@ -13,6 +13,7 @@ import com.itcast.www.myapplication.pager.HomePage;
 import com.itcast.www.myapplication.pager.NewsCenterPage;
 import com.itcast.www.myapplication.pager.SettingPage;
 import com.itcast.www.myapplication.pager.SmartSevicePage;
+import com.itcast.www.myapplication.view.MyLazyViewPager;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -55,12 +56,13 @@ public class ContentFragment extends BaseFragment{
     }
 
     @ViewInject(R.id.vp_home)
-    private ViewPager vp_home;
+    private MyLazyViewPager vp_home;
     @ViewInject(R.id.rg_home)
     private RadioGroup rg_home;
 
     @Override
     public View initView() {
+
 
         View view = View.inflate(context, R.layout.fragment_home,null);
         ViewUtils.inject(this,view);
@@ -85,7 +87,7 @@ public class ContentFragment extends BaseFragment{
         return null;
     }
 
-    class MyPagerAdapter extends PagerAdapter{
+    class MyPagerAdapter extends PagerAdapter {
         @Override
         public int getCount() {
             return pages.size();
