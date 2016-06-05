@@ -1,6 +1,7 @@
 package com.itcast.www.myapplication.pager;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.itcast.www.myapplication.bean.NewsCenterBean;
 import com.itcast.www.myapplication.utils.NetUrl;
+import com.itcast.www.myapplication.utils.StringUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -37,9 +39,17 @@ public class NewsCenterPage extends BasePager {
     @Override
     public void initData() {
         textView.setText("我是新闻中心");
+        //先从本地读取，读取不到，在从网络获取
+        String jsonString = StringUtils.getSp(context, NetUrl.NEWS_CENTER_CATEGORIES);
+        if(!TextUtils.isEmpty(jsonString)){
+//            parseJson(jsonString);
+        }
+        requestData();
+    }
 
+    private void requestData() {
         HttpUtils httpUtils = new HttpUtils();
-        httpUtils.send(HttpRequest.HttpMethod.GET,NetUrl.NEWS_CENTER_CATEGORIES,  null, new RequestCallBack<String>() {
+        httpUtils.send(HttpRequest.HttpMethod.GET, NetUrl.NEWS_CENTER_CATEGORIES,  null, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 String result = responseInfo.result;
