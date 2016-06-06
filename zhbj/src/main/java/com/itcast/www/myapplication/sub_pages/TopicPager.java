@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
+import com.itcast.www.myapplication.bean.NewsCenterBean;
 import com.itcast.www.myapplication.pager.BasePager;
 
 /**
@@ -13,7 +14,7 @@ public class TopicPager extends BasePager {
 
     private TextView textView;
 
-    public TopicPager(Context context) {
+    public TopicPager(Context context, NewsCenterBean.DataBean dataBean) {
         super(context);
     }
 

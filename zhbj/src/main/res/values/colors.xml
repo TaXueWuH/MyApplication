@@ -14,4 +14,6 @@
 
     <color name="news_item_has_read_textcolor">#828282</color>
     <color name="news_item_no_read_textcolor">#363636</color>
+
+
 </resources>

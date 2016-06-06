@@ -136,10 +136,10 @@ public class NewsCenterPage extends BasePager {
         MenuFragment menuFragment = mainActivity.getMenuFragmentByTag();
         menuFragment.initSubMenu(newsCenterBean.data);
 
-        subPages.add(new NewsPager(context));
-        subPages.add(new TopicPager(context));
-        subPages.add(new ArrPicPager(context));
-        subPages.add(new InterActionPager(context));
+        subPages.add(new NewsPager(context,newsCenterBean.data.get(0)));
+        subPages.add(new TopicPager(context,newsCenterBean.data.get(1)));
+        subPages.add(new ArrPicPager(context,newsCenterBean.data.get(2)));
+        subPages.add(new InterActionPager(context,newsCenterBean.data.get(3)));
         switchSubMenu(0);
     }
 

@@ -1,6 +1,7 @@
 package com.itcast.www.myapplication;
 
 import android.os.Bundle;
+import android.view.Window;
 
 import com.itcast.www.myapplication.fragment.ContentFragment;
 import com.itcast.www.myapplication.fragment.MenuFragment;
@@ -11,6 +12,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.slidemenu_content);

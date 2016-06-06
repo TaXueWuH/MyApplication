@@ -10,12 +10,14 @@ import com.itcast.www.myapplication.pager.BasePager;
 /**
  * Created by LSL on 2016/6/6.
  */
-public class ArrPicPager extends BasePager {
+public class NewsItemPager extends BasePager {
 
+    public NewsCenterBean.DataBean.ChildrenBean childenBean;
     private TextView textView;
 
-    public ArrPicPager(Context context, NewsCenterBean.DataBean dataBean) {
+    public NewsItemPager(Context context,NewsCenterBean.DataBean.ChildrenBean childrenBean) {
         super(context);
+        this.childenBean = childrenBean;
     }
 
     @Override
@@ -26,6 +28,6 @@ public class ArrPicPager extends BasePager {
 
     @Override
     public void initData() {
-        textView.setText("我是组图界面");
+        textView.setText(childenBean.title);
     }
 }
