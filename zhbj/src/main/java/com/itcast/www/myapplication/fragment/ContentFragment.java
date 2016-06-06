@@ -87,6 +87,14 @@ public class ContentFragment extends BaseFragment{
         return null;
     }
 
+    /**
+     * 将数据暴露出去
+     * @return
+     */
+    public List<BasePager> getPages(){
+            return pages;
+    }
+
     class MyPagerAdapter extends PagerAdapter {
         @Override
         public int getCount() {

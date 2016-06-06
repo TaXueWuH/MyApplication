@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.itcast.www.myapplication.MainActivity;
 import com.itcast.www.myapplication.R;
 import com.itcast.www.myapplication.bean.NewsCenterBean;
+import com.itcast.www.myapplication.pager.NewsCenterPage;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -105,8 +107,19 @@ public class MenuFragment extends BaseFragment {
     private class MyOnItemClickListener implements OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            //刷新被选中条目的样式
             currentPosition = i;
             adapter.notifyDataSetChanged();
+            //关闭二级菜单
+            MainActivity mainActivity = (MainActivity) context;
+            mainActivity.toggle();
+
+            //切换新闻中心区域的显示内容
+            ContentFragment contentFragment = mainActivity.getContentFragmentByTag();
+            NewsCenterPage newsCenterPage = (NewsCenterPage) contentFragment.getPages().get(1);
+
+            newsCenterPage.switchSubMenu(i);
+
         }
     }
 }

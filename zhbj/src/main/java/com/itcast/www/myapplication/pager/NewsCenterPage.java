@@ -15,6 +15,10 @@ import com.itcast.www.myapplication.MainActivity;
 import com.itcast.www.myapplication.R;
 import com.itcast.www.myapplication.bean.NewsCenterBean;
 import com.itcast.www.myapplication.fragment.MenuFragment;
+import com.itcast.www.myapplication.sub_pages.ArrPicPager;
+import com.itcast.www.myapplication.sub_pages.InterActionPager;
+import com.itcast.www.myapplication.sub_pages.NewsPager;
+import com.itcast.www.myapplication.sub_pages.TopicPager;
 import com.itcast.www.myapplication.utils.NetUrl;
 import com.itcast.www.myapplication.utils.StringUtils;
 import com.lidroid.xutils.HttpUtils;
@@ -24,6 +28,9 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by LSL on 2016/6/4.
@@ -46,6 +53,8 @@ public class NewsCenterPage extends BasePager {
     private LinearLayout ll_title_bar;
     @ViewInject(R.id.fl_news_center)
     private FrameLayout fl_news_center;
+
+    private List<BasePager> subPages = new ArrayList<>();
 
     public NewsCenterPage(Context context) {
         super(context);
@@ -126,5 +135,37 @@ public class NewsCenterPage extends BasePager {
         MainActivity mainActivity = (MainActivity) context;
         MenuFragment menuFragment = mainActivity.getMenuFragmentByTag();
         menuFragment.initSubMenu(newsCenterBean.data);
+
+        subPages.add(new NewsPager(context));
+        subPages.add(new TopicPager(context));
+        subPages.add(new ArrPicPager(context));
+        subPages.add(new InterActionPager(context));
+        switchSubMenu(0);
+    }
+
+    public void switchSubMenu(int i) {
+        BasePager basePager = subPages.get(i);
+        View currentView = basePager.initView();
+        basePager.initData();
+
+        fl_news_center.removeAllViews();
+        fl_news_center.addView(currentView);
+
+        switch (i) {
+            case 0:
+                Log.i("NewsCenterPager","点击了新闻中心");
+                break;
+            case 1:
+                Log.i("NewsCenterPager","点击了专题中心");
+                break;
+            case 2:
+                Log.i("NewsCenterPager","点击了组图中心");
+                break;
+            case 3:
+                Log.i("NewsCenterPager","点击了互动中心");
+                break;
+        }
+
+
     }
 }
