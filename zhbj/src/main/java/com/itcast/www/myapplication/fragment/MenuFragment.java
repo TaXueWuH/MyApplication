@@ -1,5 +1,6 @@
 package com.itcast.www.myapplication.fragment;
 
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,8 +24,11 @@ public class MenuFragment extends BaseFragment {
 
     private List<NewsCenterBean.DataBean> data;
 
+    private int currentPosition;
+
     @ViewInject(R.id.lv_menu_news_center)
     private ListView lv_menu_news_center;
+    private MyBaseAdapter adapter;
 
     @Override
     public View initView() {
@@ -41,7 +45,7 @@ public class MenuFragment extends BaseFragment {
 
     public void initSubMenu(List<NewsCenterBean.DataBean> data) {
         this.data = data;
-        MyBaseAdapter adapter = new MyBaseAdapter();
+        adapter = new MyBaseAdapter();
         lv_menu_news_center.setAdapter(adapter);
         lv_menu_news_center.setOnItemClickListener(new MyOnItemClickListener());
     }
@@ -80,6 +84,15 @@ public class MenuFragment extends BaseFragment {
 
             NewsCenterBean.DataBean dataBean = data.get(i);
             viewHolder.tv_menu_item.setText(dataBean.title);
+            if(currentPosition ==i){
+                viewHolder.iv_menu_item.setBackgroundResource(R.drawable.menu_arr_select);
+                viewHolder.tv_menu_item.setTextColor(Color.RED);
+                convertView.setBackgroundResource(R.drawable.menu_item_bg_select);
+            }else{
+                viewHolder.iv_menu_item.setBackgroundResource(R.drawable.menu_arr_normal);
+                viewHolder.tv_menu_item.setTextColor(Color.WHITE);
+                convertView.setBackground(null);
+            }
             return convertView;
         }
 
@@ -92,7 +105,8 @@ public class MenuFragment extends BaseFragment {
     private class MyOnItemClickListener implements OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+            currentPosition = i;
+            adapter.notifyDataSetChanged();
         }
     }
 }
