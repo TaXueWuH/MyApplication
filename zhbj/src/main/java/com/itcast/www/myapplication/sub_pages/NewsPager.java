@@ -48,6 +48,8 @@ public class NewsPager extends BasePager {
     private List<NewsItemPager> newsItemPages = new ArrayList<>();
     @Override
     public void initData() {
+        //解决重复进入newsItemsPages重复添加，导致闪退的BUG
+        newsItemPages.clear();
         for (int i = 0;i<children.getChildren().size();i++) {
             newsItemPages.add(new NewsItemPager(context,children.getChildren().get(i)));
         }

@@ -176,6 +176,16 @@ public class NewsCenterBean {
             public void setUrl(String url) {
                 this.url = url;
             }
+
+            @Override
+            public String toString() {
+                return "ChildrenBean{" +
+                        "id=" + id +
+                        ", title='" + title + '\'' +
+                        ", type=" + type +
+                        ", url='" + url + '\'' +
+                        '}';
+            }
         }
     }
 }

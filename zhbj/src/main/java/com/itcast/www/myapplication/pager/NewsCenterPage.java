@@ -21,12 +21,10 @@ import com.itcast.www.myapplication.sub_pages.NewsPager;
 import com.itcast.www.myapplication.sub_pages.TopicPager;
 import com.itcast.www.myapplication.utils.NetUrl;
 import com.itcast.www.myapplication.utils.StringUtils;
-import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
@@ -104,7 +102,7 @@ public class NewsCenterPage extends BasePager {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 String result = responseInfo.result;
-                Log.i("NewsCenterPage", result);
+//                Log.i("NewsCenterPage", result);
                 parseJson(result);
             }
 
@@ -116,16 +114,7 @@ public class NewsCenterPage extends BasePager {
         });
     }
 
-    /**
-     * 抽取自定义的网络请求
-     *
-     * @param url
-     * @param requestCallBack
-     */
-    private void sendRequest(String url, RequestCallBack<String> requestCallBack) {
-        HttpUtils httpUtils = new HttpUtils();
-        httpUtils.send(HttpRequest.HttpMethod.GET, url, null, requestCallBack);
-    }
+
 
     private void parseJson(String result) {
         Gson gson = new Gson();
